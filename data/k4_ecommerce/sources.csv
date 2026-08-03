@@ -1,7 +1,7 @@
 doc_id,file_path,title,source_url,retrieved_at,document_version,license_or_permission
-k4_chinh_sach_kiem_hang,data/k4_ecommerce/TIKI_Chinh_sach_kiem_hang.md,Chính sách kiểm hàng,https://hotro.tiki.vn/knowledge-base/post/615-chinh-sach-kiem-hang,2026-08-03,2026.1,example-template-replace-me
-k4_returns_policy,data/k4_ecommerce/returns-policy.md,Chính sách đổi trả,https://example.com/chinh-sach/doi-tra,2026-08-02,2026.1,example-template-replace-me
-k4_security_policy,data/k4_ecommerce/TIKI_chinh_sach_bao_mat.md,Chính sách bảo mật,https://tiki.vn/bao-mat-thanh-toan,2026-08-03,2026.1,example-template-replace-me
-k4_chinh_sach_khieu_nai,data/k4_ecommerce/TIKI_Chinh_sach_khieu_nai.md,Chính sách khiếu nại,https://hotro.tiki.vn/knowledge-base/post/778-chinh-sach-giai-quyet-khieu-nai,2026-08-03,2026.1,example-template-replace-me
-k4_packing_guide,data/k4_ecommerce/TIKI_huong_dan_dong_goi_gui_hang.md,Hướng dẫn đóng gói sản phẩm để gửi trả hàng,https://hotro.tiki.vn/knowledge-base/post/1090-huong-dan-dong-goi-san-pham-de-gui-tra-hang,2026-08-03,2026.1,example-template-replace-me
-k4_dang_ky_ban_hang,data/k4_ecommerce/k4-dang-ky-ban-hang.md,Đăng ký bán hàng,https://hocvien.tiki.vn/faq/huong-dan-dang-ky-ban-hang-va-ky-hop-dong/,2026-08-03,not-stated,public-source
+k4-dang-ky-ban-hang,data/k4_ecommerce/k4-dang-ky-ban-hang.md,Đăng ký bán hàng,https://hocvien.tiki.vn/faq/huong-dan-dang-ky-ban-hang-va-ky-hop-dong/,2026-08-03,not-stated,public-source
+k4_returns_policy,data/k4_ecommerce/returns-policy.md,Chính sách đổi trả và hoàn tiền,https://hotro.tiki.vn/knowledge-base/post/802-chinh-sach-ve-doi-tra-hang-va-hoan-tien,2026-08-03,2026.1,public-source
+k4_security_policy,data/k4_ecommerce/TIKI_chinh_sach_bao_mat.md,Chính sách bảo mật,https://tiki.vn/bao-mat-thanh-toan,2026-08-03,2026.1,public-source
+k4_tiki_chinh_sach_khieu_nai,data/k4_ecommerce/TIKI_Chinh_sach_khieu_nai.md,Chính sách khiếu nại,https://hotro.tiki.vn/knowledge-base/post/778-chinh-sach-giai-quyet-khieu-nai,2026-08-03,2026.07,public-source,
+k4_chinh_sach_kiem_hang,data/k4_ecommerce/TIKI_chinh_sach_kiem_hang.md,Chính sách kiểm hàng,https://hotro.tiki.vn/knowledge-base/post/615-chinh-sach-kiem-hang,2026-08-03,2026.1,public-source
+k4_packing_guide,data/k4_ecommerce/TIKI_huong_dan_dong_goi_gui_hang.md,Hướng dẫn đóng gói sản phẩm để gửi trả hàng,https://hotro.tiki.vn/knowledge-base/post/1090-huong-dan-dong-goi-san-pham-de-gui-tra-hang,2026-08-03,2026.1,public-source

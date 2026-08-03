@@ -1,4 +1,4 @@
----
+---  
 doc_id: "k4-dang-ky-ban-hang"
 title: "Đăng ký bán hàng"
 source_url: "https://hocvien.tiki.vn/faq/huong-dan-dang-ky-ban-hang-va-ky-hop-dong/"
@@ -7,7 +7,7 @@ document_version: "not-stated"
 customer_role: "seller"
 category: "policy"
 language: "vi"
----
+---  
 
 # Đăng ký bán hàng
 

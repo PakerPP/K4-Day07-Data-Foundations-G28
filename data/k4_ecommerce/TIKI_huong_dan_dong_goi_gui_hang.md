@@ -1,13 +1,13 @@
----
-doc_id: k4_packing_guide
-title: Hướng dẫn đóng gói sản phẩm để gửi trả hàng
-customer_role: buyer        # buyer | seller | both
-category: returns
-language: vi
-source_url: https://hotro.tiki.vn/knowledge-base/post/1090-huong-dan-dong-goi-san-pham-de-gui-tra-hang
-retrieved_at: 2026-08-03
+---  
+doc_id: "k4_packing_guide"
+title: "Hướng dẫn đóng gói sản phẩm để gửi trả hàng"
+customer_role: "buyer"
+category: "returns"
+language: "vi"
+source_url: "https://hotro.tiki.vn/knowledge-base/post/1090-huong-dan-dong-goi-san-pham-de-gui-tra-hang"
+retrieved_at: "2026-08-03"
 document_version: "2026.1"
----
+---  
 Nhằm đảm bảo an toàn cho sản phẩm khi gửi về Tiki, quý khách vui lòng thực hiện đóng gói sản phẩm theo hướng dẫn sau:
 
 Bước 1: Đóng gói sản phẩm trong hộp
@@ -57,4 +57,3 @@ Quý khách vui lòng đối chiếu thông tin mã thu hồi với nhân viên 
 + Đơn vị thu hồi Tiki trong 24 giờ. 
 + Đơn vị thu hồi khác từ  1-3 ngày làm việc.
 + Sản phẩm thuộc nhà bán, tuỳ theo quy trình xử lý nhà bán từ 5 - 7 ngày làm việc.
-Ngoài ra quý khách vui lòng theo dõi tình trạng đổi trả tại Mục Đổi Trả trên Ứng dụng/ Website Tiki, tham khảo hướng dẫn  tại đây

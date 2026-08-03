@@ -1,13 +1,13 @@
----
-doc_id: k4_tiki_chinh_sach_khieu_nai
-title: Chính sách khiếu nại
-customer_role: buyer        # buyer | seller | both
-category: dispute
-language: vi
-source_url: https://hotro.tiki.vn/knowledge-base/post/778-chinh-sach-giai-quyet-khieu-nai
-retrieved_at: 2026-08-02
-document_version: "2026.07"
----
+---  
+doc_id: "k4_tiki_chinh_sach_khieu_nai"
+title: "Chính sách khiếu nại"
+customer_role: "buyer"
+category: "dispute"
+language: "vi"
+source_url: "https://hotro.tiki.vn/knowledge-base/post/778-chinh-sach-giai-quyet-khieu-nai"
+retrieved_at: "2026-08-03"
+document_version: "2026.01"
+---  
 # Quy trình giải quyết tranh chấp, khiếu nại.
 
 Tiki luôn có trách nhiệm tiếp nhận và xử lý khiếu nại của Khách hàng liên quan đến giao dịch tại sàn thương mại điện Tiki. Khi phát sinh các khiếu nại, tranh chấp, Tiki đề cao giải pháp thương lượng, hòa giải giữa các bên nhằm duy trì mối quan hệ, sự tin cậy của Khách hàng vào chất lượng dịch vụ của Tiki.

@@ -1,14 +1,13 @@
----
-doc_id: k4_security_policy
-title: Chính sách bảo mật
-customer_role: buyer        # buyer | seller | both
-category: security
-language: vi
-source_url: https://tiki.vn/bao-mat-thanh-toan
-retrieved_at: 2026-08-03
+---  
+doc_id: "k4_security_policy"
+title: "Chính sách bảo mật"
+customer_role: "buyer"
+category: "security"
+language: "vi"
+source_url: "https://tiki.vn/bao-mat-thanh-toan"
+retrieved_at: "2026-08-03"
 document_version: "2026.1"
----
-
+---  
 # Cam kết bảo mật 
 Hệ thống thanh toán thẻ được cung cấp bởi các Đối Tác Cổng Thanh Toán đã được cấp phép hoạt 
 động hợp pháp tại Việt Nam. Theo đó, các tiêu chuẩn bảo mật thanh toán thẻ tại Tiki đảm bảo tuân 
