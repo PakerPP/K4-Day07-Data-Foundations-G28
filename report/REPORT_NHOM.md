@@ -1,7 +1,16 @@
 # Báo Cáo Nhóm — Lab 7: Embedding & Vector Store
 
-**Nhóm:** [Tên nhóm]
-**Thành viên:** [Họ tên từng thành viên]
+**Nhóm:** [Điền tên nhóm]
+**Thành viên:**
+
+| # | Họ tên | MSSV |
+|---|--------|------|
+| 1 | Bùi Xuân Tùng | 2A202601828 |
+| 2 | Đặng Ngọc Anh | 2A202601706 |
+| 3 | Nguyễn Quang Sơn | 2A202601956 |
+| 4 | Nguyễn Trung Hiếu | 2A202601620 |
+| 5 | Trần Trung Kiên | 2A202601754 |
+
 **Ngày:** [Ngày nộp]
 
 > **Nộp 1 bản / nhóm.** Phần cá nhân (hướng tiếp cận, kết quả riêng, dự đoán…) mỗi thành viên nộp riêng trong `REPORT_CANHAN.md`. Chi tiết thang điểm: `docs/SCORING.md`.
@@ -58,9 +67,9 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 ### Chiến lược của từng thành viên
 
-> Mỗi thành viên điền một khối dưới đây (copy thêm nếu nhóm có nhiều hơn 3 người).
+> Mỗi thành viên điền một khối dưới đây. **Mỗi người chọn một chiến lược khác nhau** để có cơ sở so sánh.
 
-**Thành viên 1 — [Tên]**
+**Thành viên 1 — Bùi Xuân Tùng (2A202601828)**
 - **Loại chiến lược:** [FixedSize / Sentence / Recursive / custom]
 - **Mô tả & lý do chọn cho chủ đề này:** *(2-3 câu)*
 - **Code snippet (nếu custom):**
@@ -68,12 +77,22 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 # Dán mã nguồn (implementation) vào đây
 ```
 
-**Thành viên 2 — [Tên]**
+**Thành viên 2 — Đặng Ngọc Anh (2A202601706)**
 - **Loại chiến lược:**
 - **Mô tả & lý do chọn:**
 - **Code snippet (nếu custom):**
 
-**Thành viên 3 — [Tên]**
+**Thành viên 3 — Nguyễn Quang Sơn (2A202601956)**
+- **Loại chiến lược:**
+- **Mô tả & lý do chọn:**
+- **Code snippet (nếu custom):**
+
+**Thành viên 4 — Nguyễn Trung Hiếu (2A202601620)**
+- **Loại chiến lược:**
+- **Mô tả & lý do chọn:**
+- **Code snippet (nếu custom):**
+
+**Thành viên 5 — Trần Trung Kiên (2A202601754)**
 - **Loại chiến lược:**
 - **Mô tả & lý do chọn:**
 - **Code snippet (nếu custom):**
@@ -82,9 +101,11 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 | Thành viên | Chiến lược (Strategy) | Điểm truy xuất (/10) | Điểm mạnh | Điểm yếu |
 |-----------|----------|----------------------|-----------|----------|
-| | | | | |
-| | | | | |
-| | | | | |
+| Bùi Xuân Tùng | | | | |
+| Đặng Ngọc Anh | | | | |
+| Nguyễn Quang Sơn | | | | |
+| Nguyễn Trung Hiếu | | | | |
+| Trần Trung Kiên | | | | |
 
 **Chiến lược nào tốt nhất cho chủ đề này? Tại sao?**
 > *Viết 2-3 câu — đây là phần được đánh giá cao nhất (khả năng suy nghĩ & giải thích):*

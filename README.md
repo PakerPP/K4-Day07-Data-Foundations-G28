@@ -2,6 +2,16 @@
 
 > Bản K4 của Lab 07. Hướng dẫn Codelabs được phát riêng trên lớp/LMS (không kèm trong repo); yêu cầu Giai đoạn 2 riêng xem [K4_VARIANT.md](K4_VARIANT.md).
 
+## Thành Viên Nhóm
+
+| # | Họ tên | MSSV |
+|---|--------|------|
+| 1 | Bùi Xuân Tùng | 2A202601828 |
+| 2 | Đặng Ngọc Anh | 2A202601706 |
+| 3 | Nguyễn Quang Sơn | 2A202601956 |
+| 4 | Nguyễn Trung Hiếu | 2A202601620 |
+| 5 | Trần Trung Kiên | 2A202601754 |
+
 ---
 
 ## Mục Tiêu
