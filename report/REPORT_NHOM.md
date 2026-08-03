@@ -76,11 +76,13 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 > Mỗi thành viên điền một khối dưới đây. **Mỗi người chọn một chiến lược khác nhau** để có cơ sở so sánh.
 
 **Thành viên 1 — Bùi Xuân Tùng (2A202601828)**
-- **Loại chiến lược:** [FixedSize / Sentence / Recursive / custom]
-- **Mô tả & lý do chọn cho chủ đề này:** *(2-3 câu)*
-- **Code snippet (nếu custom):**
+- **Loại chiến lược:** FixedSize với tham số tinh chỉnh — **`chunk_size = 900` ký tự, `overlap = 150` ký tự** (mặc định của lab là 500/50). Cụ thể: `FixedSizeChunker(chunk_size=900, overlap=150)`, cho ra 50 chunk, độ dài trung bình 884.3 ký tự trên bộ 6 tài liệu.
+- **Mô tả & lý do chọn cho chủ đề này:** Tôi thử 6 cấu hình trên cùng 5 câu hỏi đánh giá và thấy chunk lớn thắng rõ: ba cấu hình quanh 900 ký tự đều đạt hit@3 5/5, còn ba cấu hình 400-500 ký tự chỉ được 4/5. Lý do là tài liệu chính sách Tiki viết theo kiểu tiêu đề rồi liệt kê điều kiện bên dưới, cắt nhỏ thì con số bị tách khỏi tiêu đề của nó — chunk chứa "30 ngày" mà mất dòng "Thời gian hỗ trợ đổi trả" thì khớp với câu hỏi kém hẳn. Overlap 150 (bằng 1/6 chunk) để một điều khoản bị cắt ngang vẫn còn nguyên ở chunk kế bên.
+- **Kết quả:** hit@3 5/5, top-1 3/5, MRR 0.800, điểm rubric 8/10.
+- **Code snippet (nếu custom):** không phải chunker tự viết, dùng `FixedSizeChunker` có sẵn với tham số đã tinh chỉnh:
 ```python
-# Dán mã nguồn (implementation) vào đây
+chunker = FixedSizeChunker(chunk_size=900, overlap=150)
+store = build_knowledge_base("data/k4_ecommerce", embedding_fn=embedder, chunker=chunker)
 ```
 
 **Thành viên 2 — Đặng Ngọc Anh (2A202601706)**
@@ -107,7 +109,7 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 | Thành viên | Chiến lược (Strategy) | Điểm truy xuất (/10) | Điểm mạnh | Điểm yếu |
 |-----------|----------|----------------------|-----------|----------|
-| Bùi Xuân Tùng | | | | |
+| Bùi Xuân Tùng | FixedSizeChunker, chunk_size=900, overlap=150 | 8 | Giữ trọn điều khoản kèm tiêu đề nên hit@3 đạt 5/5; lọc metadata `category=security` đưa câu 5 từ 2/3 lên 3/3 | Chunk dài 884 ký tự trung bình nên tốn token ngữ cảnh; đoạn "hoàn tiền 3-5 ngày làm việc" hút nhầm top-1 ở câu 1 và câu 5 |
 | Đặng Ngọc Anh | | | | |
 | Nguyễn Quang Sơn | | | | |
 | Nguyễn Trung Hiếu | | | | |
