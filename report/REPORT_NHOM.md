@@ -1,8 +1,13 @@
 # Báo Cáo Nhóm — Lab 7: Embedding & Vector Store
 
-**Nhóm:** [Tên nhóm]
-**Thành viên:** [Họ tên từng thành viên]
-**Ngày:** [Ngày nộp]
+**Nhóm:** G28-E403  
+**Thành viên:**  
+| Họ tên | ID | 
+|---|---|
+| Nguyễn Trung Hiếu | 2A202601620 | 
+|  |  | 
+|  |  | 
+**Ngày:** 03-08-2026  
 
 > **Nộp 1 bản / nhóm.** Phần cá nhân (hướng tiếp cận, kết quả riêng, dự đoán…) mỗi thành viên nộp riêng trong `REPORT_CANHAN.md`. Chi tiết thang điểm: `docs/SCORING.md`.
 
@@ -14,10 +19,10 @@
 
 ### Phạm vi bộ tài liệu (Scope)
 
-**Chủ đề (cố định theo lớp K4):** Chính sách thương mại điện tử / hỗ trợ khách hàng (thanh toán, đổi trả, giao hàng, quyền riêng tư, điều kiện người bán…).
+**Chủ đề (cố định theo lớp K4):** Các chính sách hỗ trợ khách hàng của TIKI
 
 **Phạm vi cụ thể nhóm tập trung:**
-> *1 câu — ví dụ: đổi trả + điều kiện người bán.*
+Đổi trả + điều kiện người bán
 
 ### Danh sách tài liệu (Data Inventory)
 
