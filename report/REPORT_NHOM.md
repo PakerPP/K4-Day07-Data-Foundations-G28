@@ -101,8 +101,9 @@ store = build_knowledge_base("data/k4_ecommerce", embedding_fn=embedder, chunker
 - **Code snippet (nếu custom):**
 
 **Thành viên 5 — Trần Trung Kiên (2A202601754)**
-- **Loại chiến lược:**
-- **Mô tả & lý do chọn:**
+- **Loại chiến lược:** Custom `HeaderChunker` — chia tài liệu theo ranh giới tiêu đề markdown (`##`, `###`), mỗi section (tiêu đề + nội dung bên dưới) thành một chunk; nếu section vẫn vượt quá `max_chunk_size`, dùng `RecursiveChunker(chunk_size=max_chunk_size)` làm fallback để cắt tiếp mà không phá cấu trúc câu. Cấu hình: `HeaderChunker(max_chunk_size=800)`, cho ra 38 chunk, độ dài trung bình 611.5 ký tự trên bộ 6 tài liệu (min 118, max 792 — do fallback recursive giới hạn ở 800).
+- **Mô tả & lý do chọn cho chủ đề này:** Tôi chọn hướng ngược lại với bạn Tùng — thay vì cố định kích thước, tôi tận dụng chính cấu trúc Markdown của tài liệu chính sách Tiki (luôn có `##`/`###` phân tách các mục như "Thời gian hỗ trợ đổi trả", "Quy trình hoàn tiền", "Bước 1/Bước 2"...). Giả thuyết là mỗi chunk sẽ tương ứng đúng 1 điều khoản, giúp điểm tương tự (similarity score) không bị pha loãng bởi nội dung không liên quan nằm chung chunk. Giả thuyết đúng cho các câu hỏi chỉ cần 1 mục duy nhất (Câu 1, 4, 5), nhưng lộ điểm yếu ở câu hỏi cần thông tin trải trên 2 mục liên tiếp (Câu 2: "gửi hàng về" + "hoàn tiền" là 2 heading khác nhau) và ở các mục quá ngắn thiếu từ khoá để thắng thứ hạng (Câu 3: "Bước 1" chỉ có 2 dòng, thua một chunk dài hơn nhưng ít liên quan hơn).
+- **Kết quả:** hit@3 5/5, top-1 đúng trọn vẹn 3/5 (Câu 1, 4, 5), MRR 0.900, điểm rubric 8/10.
 - **Code snippet (nếu custom):**
 
 ### So Sánh Giữa Các Thành Viên
@@ -113,7 +114,7 @@ store = build_knowledge_base("data/k4_ecommerce", embedding_fn=embedder, chunker
 | Đặng Ngọc Anh | | | | |
 | Nguyễn Quang Sơn | | | | |
 | Nguyễn Trung Hiếu | | | | |
-| Trần Trung Kiên | | | | |
+| Trần Trung Kiên | Custom `HeaderChunker`, chia theo tiêu đề markdown (`##`/`###`), fallback `RecursiveChunker(chunk_size=800)` | 8 | Chunk ngắn (611.5 ký tự TB) và "sạch" theo từng điều khoản nên top-1 chính xác tuyệt đối ở câu 1, 4, 5; ít tốn token ngữ cảnh hơn hẳn so với FixedSize 900 | Câu trả lời trải trên 2 heading liên tiếp (câu 2) bị tách thành 2 chunk riêng, top-1 chỉ chứa một nửa câu trả lời; mục quá ngắn (câu 3, "Bước 1" chỉ 2 dòng) thiếu từ khoá nên bị chunk khác xếp trên, tụt xuống hạng 2 |
 
 **Chiến lược nào tốt nhất cho chủ đề này? Tại sao?**
 > *Viết 2-3 câu — đây là phần được đánh giá cao nhất (khả năng suy nghĩ & giải thích):*
