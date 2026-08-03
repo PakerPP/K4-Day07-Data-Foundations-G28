@@ -84,7 +84,7 @@ Vượt qua bộ kiểm thử là điều kiện tính điểm phần này.
 ### Kết Quả Kiểm Thử (Test Results)
 
 ```
-$ LAB_SOLUTION_PACKAGE="src.BuiXuanTung-2A202601828" pytest tests/ -v
+$ LAB_SOLUTION_PACKAGE="src.BuiXuanTung-2A202601828" python -m unittest discover -s tests -t . -v
 test_delete_reduces_collection_size ... ok
 test_delete_returns_false_for_nonexistent_doc ... ok
 test_delete_returns_true_for_existing_doc ... ok
@@ -114,7 +114,7 @@ OK
 
 **Số lượng bài test vượt qua (pass):** **42 / 42**
 
-> Ghi chú cấu trúc: cả nhóm dùng chung một repo nên mã nguồn của tôi để ở gói riêng `src/BuiXuanTung-2A202601828/`, thư mục `src/` gốc giữ nguyên bản template. Bộ test đã hỗ trợ sẵn việc này qua biến `LAB_SOLUTION_PACKAGE` ([tests/test_solution.py:17](../tests/test_solution.py#L17)) nên chỉ cần đặt biến môi trường như lệnh trên. Máy tôi chưa cài `pytest` nên tôi chạy bằng `python -m unittest discover -s tests -t .`, cùng file test và cùng 42 case.
+> Ghi chú cấu trúc: cả nhóm dùng chung một repo nên mã nguồn của tôi để ở gói riêng `src/BuiXuanTung-2A202601828/`, thư mục `src/` gốc giữ nguyên bản template. Bộ test đã hỗ trợ sẵn việc này qua biến `LAB_SOLUTION_PACKAGE` ([tests/test_solution.py:17](../tests/test_solution.py#L17)) nên chỉ cần đặt biến môi trường như lệnh trên. Máy tôi chưa cài `pytest` nên tôi chạy bằng `unittest` như lệnh trên; vẫn là file `tests/test_solution.py` và đủ 42 case. Trên môi trường có `pytest` thì lệnh tương đương là `LAB_SOLUTION_PACKAGE="src.BuiXuanTung-2A202601828" pytest tests/ -v`.
 
 Ngoài bộ test, tôi chạy thêm hai thứ để chắc chắn code hoạt động trên dữ liệu thật:
 
@@ -150,7 +150,7 @@ Tôi ghi dự đoán trước, sau đó gọi `compute_similarity()` bằng hai 
 
 ## 5. Kết quả truy xuất của tôi (Competition Results) - Cá nhân (10 điểm)
 
-Chiến lược của tôi: **`FixedSizeChunker(chunk_size=900, overlap=150)`**, chọn sau khi so 6 cấu hình (bảng bên dưới). Dữ liệu là 6 tài liệu Tiki của nhóm (37.614 ký tự), embedder `local`, top-k = 3. Bộ 5 câu hỏi và gold answer lấy từ [`REPORT_NHOM.md`](REPORT_NHOM.md) Phần 3.
+Chiến lược của tôi: **`FixedSizeChunker(chunk_size=900, overlap=150)`**, chọn sau khi so 5 cấu hình (bảng bên dưới). Dữ liệu là 6 tài liệu Tiki của nhóm (37.614 ký tự), embedder `local`, top-k = 3. Bộ 5 câu hỏi và gold answer lấy từ [`REPORT_NHOM.md`](REPORT_NHOM.md) Phần 3.
 
 > Cách chấm: một chunk chỉ được tính là đúng khi vừa khớp `doc_id` kỳ vọng, vừa chứa từ khoá bằng chứng của gold answer. Nếu chỉ chấm theo `doc_id` thì `returns-policy.md` (15 KB) sẽ luôn được tính đúng cho mọi câu về đổi trả kể cả khi lấy nhầm đoạn, đúng cái bẫy xảy ra ở câu 1. Điểm theo `docs/SCORING.md`: 2đ nếu chunk đúng ở top-1, 1đ nếu ở hạng 2-3, 0đ nếu trượt.
 
@@ -164,12 +164,11 @@ Chiến lược của tôi: **`FixedSizeChunker(chunk_size=900, overlap=150)`**,
 
 **Bao nhiêu câu hỏi trả về chunk có liên quan trong top-3?** **5 / 5**, trong đó 3 câu đúng ngay top-1, 2 câu ở hạng 2. Điểm rubric: **8/10**.
 
-### So sánh 6 chiến lược trên cùng bộ câu hỏi
+### So sánh 5 chiến lược trên cùng bộ câu hỏi
 
 | Chiến lược | Số chunk | Độ dài TB | hit@3 | top-1 | MRR | Điểm rubric /10 |
 |---|---|---|---|---|---|---|
 | `fixed_900_150` (của tôi) | 50 | 884.3 | 5/5 | 3/5 | 0.800 | 8 |
-| `heading_900` (custom) | 76 | 503.1 | 5/5 | 3/5 | 0.767 | 8 |
 | `recursive_900` | 50 | 748.6 | 5/5 | 3/5 | 0.733 | 8 |
 | `fixed_500_50` | 85 | 489.0 | 4/5 | 3/5 | 0.700 | 7 |
 | `sentences_3` | 89 | 419.0 | 4/5 | 2/5 | 0.600 | 6 |
@@ -177,7 +176,7 @@ Chiến lược của tôi: **`FixedSizeChunker(chunk_size=900, overlap=150)`**,
 
 **Nhận xét:**
 
-Chunk lớn cho kết quả tốt hơn hẳn trên bộ tài liệu này. Ba cấu hình quanh 900 ký tự đều đạt 5/5, ba cấu hình 400-500 ký tự chỉ được 4/5, riêng `recursive_500` tuy vẫn 4/5 nhưng chỉ 1/5 ở top-1. Tôi nghĩ nguyên nhân là chính sách Tiki viết theo kiểu tiêu đề rồi liệt kê điều kiện, cắt nhỏ thì con số bị tách khỏi tiêu đề của nó. Chunk chứa "30 ngày" mà mất dòng "Thời gian hỗ trợ đổi trả" thì khớp với câu hỏi kém hẳn.
+Chunk lớn cho kết quả tốt hơn hẳn trên bộ tài liệu này. Hai cấu hình quanh 900 ký tự đều đạt 5/5, ba cấu hình 400-500 ký tự chỉ được 4/5, riêng `recursive_500` tuy vẫn 4/5 nhưng chỉ 1/5 ở top-1. Tôi nghĩ nguyên nhân là chính sách Tiki viết theo kiểu tiêu đề rồi liệt kê điều kiện, cắt nhỏ thì con số bị tách khỏi tiêu đề của nó. Chunk chứa "30 ngày" mà mất dòng "Thời gian hỗ trợ đổi trả" thì khớp với câu hỏi kém hẳn.
 
 Câu 1 và câu 5 bị cùng một chunk cướp top-1, là đoạn "hoàn tiền... 3-5 ngày làm việc" của `k4_returns_policy`. Đoạn này đặc từ vựng chung của cả miền như "thời gian", "thanh toán", "khách hàng" nên câu hỏi nào trong miền cũng khớp được một phần. Đây đúng là hiện tượng tương đồng nền tôi gặp ở cặp 3 mục 4.
 
@@ -191,8 +190,6 @@ Lọc metadata xử lý được đúng ca đó. Vẫn câu 5, vẫn chiến lư
 Chunk nhiễu bị loại hết và chunk đúng lên top-1. Đây là câu thoả yêu cầu "ít nhất 1 câu cần metadata filtering" ở [exercises.md:142](../exercises.md#L142).
 
 Về khoảng cách điểm giữa top-1 và top-2: câu 4 gap chỉ +0.005 mà vẫn đúng, còn câu 1 và câu 5 điểm top-1 cao (+0.626 và +0.538) nhưng lấy sai đoạn. Nên gap nhỏ chỉ là dấu hiệu mô hình đang phân vân, còn điểm tuyệt đối cao thì không bảo đảm gì cả.
-
-Chunker `heading_900` tôi tự viết cắt theo tiêu đề Markdown, đạt hit@3 5/5 bằng chiến lược thắng nhưng chunk ngắn hơn 43% (503 so với 884 ký tự), tức là đưa vào LLM ít chữ thừa hơn cho cùng chất lượng truy xuất. Nếu tính cả chi phí ngữ cảnh thì tôi nghĩ nó mới là lựa chọn tốt nhất, tôi sẽ nêu khi so sánh trong nhóm.
 
 **Điều hay nhất tôi học được từ thành viên khác / nhóm khác (qua demo):**
 > *[Điền sau buổi demo]*
