@@ -120,11 +120,13 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 | # | Câu hỏi (Query) | Câu trả lời chuẩn (Gold Answer) | Chunk nào chứa thông tin? |
 |---|-------|-------------------------------|--------------------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
+| 1 | Tôi được đổi trả hàng trong bao nhiêu ngày kể từ khi nhận hàng? | 30 ngày kể từ lúc nhận hàng thành công với mọi lý do. Riêng Thiết bị số - Phụ kiện số và Điện gia dụng do Tiki Trading bán, lỗi kỹ thuật được đổi trả trong 365 ngày. | `k4_returns_policy` — mục "Thời gian hỗ trợ đổi trả tại Tiki" |
+| 2 | Sau khi yêu cầu đổi trả được duyệt thì bao lâu tôi phải gửi hàng về, và bao lâu được hoàn tiền? | Phải bàn giao hàng trong 07 ngày làm việc kể từ khi yêu cầu được chấp thuận, quá hạn Tiki có quyền hủy. Hoàn tiền sau khi kiểm tra chất lượng, khoảng 3-5 ngày làm việc; thẻ Visa/Master/JCB thêm 1-3 tuần. | `k4_returns_policy` — mục "Quy trình yêu cầu hoàn trả" + "Quy trình hoàn tiền" |
+| 3 | Tôi khiếu nại đơn hàng qua kênh nào và bao lâu Tiki phản hồi? | Hotline 19006035 (8h-21h hằng ngày), email hotro@tiki.vn, hoặc chat trực tiếp. Tiki Care tiếp nhận và liên hệ làm rõ không quá 3 ngày làm việc. | `k4_tiki_chinh_sach_khieu_nai` — Bước 1 và Bước 2 |
+| 4 | Khi nhận hàng tôi được phép kiểm tra sản phẩm tới mức nào? | Được mở niêm phong thùng hàng của Tiki để kiểm tra, nhưng không được mở seal riêng của sản phẩm và không kiểm tra sâu (cắm điện, dùng thử, ghi chép dữ liệu). | `k4_chinh_sach_kiem_hang` — toàn bộ tài liệu |
+| 5 | Thông tin thẻ thanh toán của tôi được lưu trữ như thế nào? | Tiki không trực tiếp lưu thông tin thẻ, chỉ lưu token đã được Đối Tác Cổng Thanh Toán mã hóa. Thẻ quốc tế do Đối Tác lưu trữ; thẻ nội địa Tiki chỉ lưu mã đơn hàng, mã giao dịch và tên ngân hàng. | `k4_security_policy` — mục "Chính sách bảo mật giao dịch trong thanh toán" |
+
+> Câu 5 là câu cần lọc metadata: từ khoá "thanh toán" trùng với tài liệu hoàn tiền nên nếu không lọc, chunk của `k4_returns_policy` sẽ chiếm top-1. Lọc `{"category": "security"}` thì cả 3 kết quả đều đúng tài liệu.
 
 ### Tổng hợp chất lượng truy xuất của nhóm
 
