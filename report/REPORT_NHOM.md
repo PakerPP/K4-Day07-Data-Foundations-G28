@@ -86,9 +86,15 @@ store = build_knowledge_base("data/k4_ecommerce", embedding_fn=embedder, chunker
 ```
 
 **Thành viên 2 — Đặng Ngọc Anh (2A202601706)**
-- **Loại chiến lược:**
-- **Mô tả & lý do chọn:**
-- **Code snippet (nếu custom):**
+- **Loại chiến lược:** `RecursiveChunker` với **`chunk_size = 600` ký tự**, separator ưu tiên mặc định `["\n\n", "\n", ". ", " ", ""]`. Cho ra **76 chunk** trên bộ 6 tài liệu, độ dài trung bình **487 ký tự** (min 102, max 600).
+- **Mô tả & lý do chọn:** Tài liệu chính sách Tiki được viết theo cấu trúc heading + đoạn/liệt kê bên dưới (`## Thời gian hỗ trợ đổi trả`, `### Bước 1: ...`), nên tôi chọn `RecursiveChunker` để tận dụng đúng cấu trúc đó: nó ưu tiên tách theo đoạn (`\n\n`) và dòng (`\n`) trước khi phải cắt cứng theo ký tự, nên phần lớn chunk giữ nguyên trọn một heading cùng nội dung ngay dưới nó thay vì bị cắt ngang tuỳ tiện như FixedSizeChunker thuần cắt theo vị trí ký tự. Chạy 5 câu hỏi benchmark: **5/5 câu có chunk liên quan trong top-3** (4/5 câu đúng ngay ở top-1); câu 5 ("thông tin thẻ thanh toán lưu trữ thế nào") là câu cần lọc metadata — `search_with_filter({"category": "security"})` loại sạch nhiễu từ `k4_returns_policy` (tài liệu này cũng nhắc "hoàn tiền"/"thanh toán" nên dễ gây nhiễu nếu không lọc). Điểm yếu: câu 4 (phạm vi kiểm tra hàng khi nhận) có chunk đúng nhất từ `k4_chinh_sach_kiem_hang` chỉ xếp hạng 2 vì tài liệu này quá ngắn (835 ký tự) nên vector "loãng" hơn so với đoạn dài cùng từ khoá từ `k4_returns_policy`.
+- **Code snippet (nếu custom):** không phải chunker tự viết, dùng `RecursiveChunker` có sẵn với tham số đã chọn:
+```python
+chunker = RecursiveChunker(chunk_size=600)
+chunk_docs = [c for doc in load_documents("data/k4_ecommerce") for c in chunk_document(doc, chunker)]
+store = EmbeddingStore(collection_name="k4_recursive", embedding_fn=LocalEmbedder())
+store.add_documents(chunk_docs)
+```
 
 **Thành viên 3 — Nguyễn Quang Sơn (2A202601956)**
 - **Loại chiến lược:**
@@ -110,7 +116,7 @@ store = build_knowledge_base("data/k4_ecommerce", embedding_fn=embedder, chunker
 | Thành viên | Chiến lược (Strategy) | Điểm truy xuất (/10) | Điểm mạnh | Điểm yếu |
 |-----------|----------|----------------------|-----------|----------|
 | Bùi Xuân Tùng | FixedSizeChunker, chunk_size=900, overlap=150 | 8 | Giữ trọn điều khoản kèm tiêu đề nên hit@3 đạt 5/5; lọc metadata `category=security` đưa câu 5 từ 2/3 lên 3/3 | Chunk dài 884 ký tự trung bình nên tốn token ngữ cảnh; đoạn "hoàn tiền 3-5 ngày làm việc" hút nhầm top-1 ở câu 1 và câu 5 |
-| Đặng Ngọc Anh | | | | |
+| Đặng Ngọc Anh | RecursiveChunker, chunk_size=600 | 8 | Tách theo `\n\n`/`\n` nên chunk bám sát heading gốc của tài liệu; 5/5 câu có chunk liên quan trong top-3; lọc `category=security` loại sạch nhiễu từ `k4_returns_policy` ở câu 5 | Chunk 600 ký tự đôi khi tách rời tiêu đề khỏi đoạn số liệu cụ thể (con số "30 ngày" rơi xuống hạng 2 ở câu 1); tài liệu ngắn (`k4_chinh_sach_kiem_hang`, 835 ký tự) bị tài liệu dài hơn lấn át ở câu 4 |
 | Nguyễn Quang Sơn | | | | |
 | Nguyễn Trung Hiếu | | | | |
 | Trần Trung Kiên | | | | |
