@@ -1,14 +1,13 @@
----
-doc_id: k4_returns_policy
-title: Chính sách đổi trả và hoàn tiền
-customer_role: buyer        # buyer | seller | both
-category: returns
-language: vi
-source_url: https://hotro.tiki.vn/knowledge-base/post/802-chinh-sach-ve-doi-tra-hang-va-hoan-tien
-retrieved_at: 2026-08-03
+---  
+doc_id: "k4_returns_policy"
+title: "Chính sách đổi trả và hoàn tiền"
+customer_role: "buyer"
+category: "returns"
+language: "vi"
+source_url: "https://hotro.tiki.vn/knowledge-base/post/802-chinh-sach-ve-doi-tra-hang-va-hoan-tien"
+retrieved_at: "2026-08-03"
 document_version: "2026.1"
----
-
+---  
 Tại Tiki, sự tin tưởng của Khách hàng là nền tảng cho mọi hoạt động của chúng tôi. Chúng tôi luôn nỗ lực mang đến trải nghiệm mua sắm trực tuyến an tâm, minh bạch và đáng tin cậy thông qua việc cung cấp các sản phẩm mới, chính hãng cùng dịch vụ chăm sóc khách hàng tận tâm.
 
 Chính sách đổi trả và hoàn tiền của Tiki được xây dựng trên cam kết bảo vệ quyền lợi người tiêu dùng, giúp quý khách yên tâm khi lựa chọn mua hàng hóa, dịch vụ trên sàn thương mại điện tử Tiki.

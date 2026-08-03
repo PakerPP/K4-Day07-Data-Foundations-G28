@@ -1,9 +1,9 @@
 # Báo Cáo Cá Nhân — Lab 7: Embedding & Vector Store
 
-**Họ tên:** Nguyễn Trung Hiếu
-**Mã sinh viên:** 2A202601620
-**Nhóm:** G28-E403
-**Ngày:** 2026-08-03
+**Họ tên:** Nguyễn Trung Hiếu  
+**Mã sinh viên:** 2A202601620  
+**Nhóm:** G28-E403  
+**Ngày:** 2026-08-03  
 
 > **Nộp 1 bản / sinh viên.** Phần nhóm (lựa chọn tài liệu, thiết kế chiến lược, bộ câu hỏi đánh giá, demo) nộp chung 1 bản trong `REPORT_NHOM.md`. Chi tiết thang điểm: `docs/SCORING.md`.
 

@@ -1,13 +1,17 @@
 # Báo Cáo Nhóm — Lab 7: Embedding & Vector Store
 
-**Nhóm:** G28-E403  
-**Thành viên:**  
-| Họ tên | ID | 
-|---|---|
-| Nguyễn Trung Hiếu | 2A202601620 | 
-|  |  | 
-|  |  | 
-**Ngày:** 03-08-2026  
+**Nhóm:** [Điền tên nhóm]
+**Thành viên:**
+
+| # | Họ tên | MSSV |
+|---|--------|------|
+| 1 | Bùi Xuân Tùng | 2A202601828 |
+| 2 | Đặng Ngọc Anh | 2A202601706 |
+| 3 | Nguyễn Quang Sơn | 2A202601956 |
+| 4 | Nguyễn Trung Hiếu | 2A202601620 |
+| 5 | Trần Trung Kiên | 2A202601754 |
+
+**Ngày:** [Ngày nộp]
 
 > **Nộp 1 bản / nhóm.** Phần cá nhân (hướng tiếp cận, kết quả riêng, dự đoán…) mỗi thành viên nộp riêng trong `REPORT_CANHAN.md`. Chi tiết thang điểm: `docs/SCORING.md`.
 
@@ -28,23 +32,29 @@
 
 | # | Tên tài liệu | Nguồn (Source URL) | Ngày lấy / Phiên bản | Số ký tự | Metadata đã gán |
 |---|--------------|------------|--------------------|----------|-----------------|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
+| 1 | k4-dang-ky-ban-hang.md | [https://seller.tiki.vn/knowledge-base/307/lich-su-su-kien-va-thanh-toan](https://seller.tiki.vn/knowledge-base/307/lich-su-su-kien-va-thanh-toan) | 2026-08-03 | 17423 | OK |
+| 2 | returns-policy.md | [https://seller.tiki.vn/knowledge-base/451/chinh-sach-bao-ve-nguoi-mua](https://seller.tiki.vn/knowledge-base/451/chinh-sach-bao-ve-nguoi-mua) | 2026-08-03 | 11484 | OK |
+| 3 | TIKI_Chinh_sach_khieu_nai.md | [https://seller.tiki.vn/knowledge-base/454/chinh-sach-bao-ve-nguoi-mua](https://seller.tiki.vn/knowledge-base/454/chinh-sach-bao-ve-nguoi-mua) | 2026-08-03 | 3894 | OK |
+| 4 | TIKI_chinh_sach_bao_mat.md | [https://seller.tiki.vn/knowledge-base/455/chinh-sach-bao-ve-nguoi-mua](https://seller.tiki.vn/knowledge-base/455/chinh-sach-bao-ve-nguoi-mua) | 2026-08-03 | 2362 | OK |
+| 5 | TIKI_huong-dan-dong-goi-gui-hang.md | [https://seller.tiki.vn/knowledge-base/503/chinh-sach-bao-ve-nguoi-mua](https://seller.tiki.vn/knowledge-base/503/chinh-sach-bao-ve-nguoi-mua) | 2026-08-03 | 2112 | OK |
+| 6 | TIKI_chinh_sach_kiem_hang.md | [https://seller.tiki.vn/knowledge-base/570/chinh-sach-bao-ve-nguoi-mua](https://seller.tiki.vn/knowledge-base/570/chinh-sach-bao-ve-nguoi-mua) | 2026-08-03 | 835 | OK |
 
 **Danh sách kiểm tra quản trị dữ liệu (Data governance checklist):**
-- [ ] Tập tài liệu (Corpus) chỉ chứa nguồn công khai/được phép dùng và không chứa dữ liệu cá nhân, thông tin đăng nhập hoặc tài liệu nội bộ.
-- [ ] Mỗi tài liệu có `source_url`, `retrieved_at`, `document_version` (hoặc ngày hiệu lực) trong metadata.
+- [X] Tập tài liệu (Corpus) chỉ chứa nguồn công khai/được phép dùng và không chứa dữ liệu cá nhân, thông tin đăng nhập hoặc tài liệu nội bộ.
+- [X] Mỗi tài liệu có `source_url`, `retrieved_at`, `document_version` (hoặc ngày hiệu lực) trong metadata.
 
 ### Cấu trúc Metadata (Metadata Schema)
 
 | Trường metadata | Kiểu | Ví dụ giá trị | Tại sao hữu ích cho truy xuất (retrieval)? |
 |----------------|------|---------------|-------------------------------|
-| | | | |
-| | | | |
-
+| doc_id | text | k4_chinh_sach_kiem_hang | mã định danh của tài liệu |
+| title | text | chính sách kiểm hàng | giúp hiểu rõ nguồn trả lời lấy từ đâu |
+| customer_role | text | buyer | Giúp bot đang hiểu thêm về người dùng đang tương tác là ai |
+| category | text | return | phân loại tài liệu để bot tìm kiếm dữ liệu nhanh hơn |
+| language | text | vi | tốt trong trường hợp query đa ngôn ngữ |
+| source_url | text | https://tiki.vn/chinh-sach-kiem-hang | kiểm tra nguồn dữ liệu |
+| retrieved_at | datetime | 2026-08-03 | Thời gian rút trích dữ liệu |
+| document_version| text | 2026.01 | Truy xuất theo phiên bản của tài liệu |
 ---
 
 ## 2. Thiết kế chiến lược (Strategy Design) — Nhóm (15 điểm)
@@ -63,9 +73,9 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 ### Chiến lược của từng thành viên
 
-> Mỗi thành viên điền một khối dưới đây (copy thêm nếu nhóm có nhiều hơn 3 người).
+> Mỗi thành viên điền một khối dưới đây. **Mỗi người chọn một chiến lược khác nhau** để có cơ sở so sánh.
 
-**Thành viên 1 — [Tên]**
+**Thành viên 1 — Bùi Xuân Tùng (2A202601828)**
 - **Loại chiến lược:** [FixedSize / Sentence / Recursive / custom]
 - **Mô tả & lý do chọn cho chủ đề này:** *(2-3 câu)*
 - **Code snippet (nếu custom):**
@@ -73,12 +83,22 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 # Dán mã nguồn (implementation) vào đây
 ```
 
-**Thành viên 2 — [Tên]**
+**Thành viên 2 — Đặng Ngọc Anh (2A202601706)**
 - **Loại chiến lược:**
 - **Mô tả & lý do chọn:**
 - **Code snippet (nếu custom):**
 
-**Thành viên 3 — [Tên]**
+**Thành viên 3 — Nguyễn Quang Sơn (2A202601956)**
+- **Loại chiến lược:**
+- **Mô tả & lý do chọn:**
+- **Code snippet (nếu custom):**
+
+**Thành viên 4 — Nguyễn Trung Hiếu (2A202601620)**
+- **Loại chiến lược:**
+- **Mô tả & lý do chọn:**
+- **Code snippet (nếu custom):**
+
+**Thành viên 5 — Trần Trung Kiên (2A202601754)**
 - **Loại chiến lược:**
 - **Mô tả & lý do chọn:**
 - **Code snippet (nếu custom):**
@@ -87,9 +107,11 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 | Thành viên | Chiến lược (Strategy) | Điểm truy xuất (/10) | Điểm mạnh | Điểm yếu |
 |-----------|----------|----------------------|-----------|----------|
-| | | | | |
-| | | | | |
-| | | | | |
+| Bùi Xuân Tùng | | | | |
+| Đặng Ngọc Anh | | | | |
+| Nguyễn Quang Sơn | | | | |
+| Nguyễn Trung Hiếu | | | | |
+| Trần Trung Kiên | | | | |
 
 **Chiến lược nào tốt nhất cho chủ đề này? Tại sao?**
 > *Viết 2-3 câu — đây là phần được đánh giá cao nhất (khả năng suy nghĩ & giải thích):*
