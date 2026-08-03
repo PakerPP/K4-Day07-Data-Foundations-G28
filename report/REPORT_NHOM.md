@@ -97,9 +97,14 @@ store.add_documents(chunk_docs)
 ```
 
 **Thành viên 3 — Nguyễn Quang Sơn (2A202601956)**
-- **Loại chiến lược:**
-- **Mô tả & lý do chọn:**
-- **Code snippet (nếu custom):**
+- **Loại chiến lược:** custom `HeadingPolicyChunker(chunk_size=900)`.
+- **Mô tả & lý do chọn:** Chunker tách Markdown theo heading (`#` đến `######`) trước, giữ heading cùng điều khoản mà nó giới thiệu. Nếu một mục dài hơn giới hạn, phần thân được chia tiếp theo đoạn/câu và heading được lặp lại trên từng mảnh con; điều này giúp query khớp cả chủ đề lẫn điều kiện của chính sách. Trên 6 tài liệu của nhóm, cấu hình này tạo **81 chunk**, độ dài trung bình **473.1 ký tự**, độ dài lớn nhất **895 ký tự**.
+- **Kết quả:** Baseline chạy bằng `_mock_embed`: top-3 có chunk liên quan ở **2/5** benchmark (câu 2 có chunk hoàn tiền ở hạng 2 và câu 5 khi lọc `category=security`), tương ứng **4/10** theo quy ước 2 điểm cho mỗi câu có hit@3. Đây là điểm baseline của pipeline; mock embedder không mã hóa ngữ nghĩa nên không dùng số liệu này để kết luận chiến lược tốt hơn các thành viên khác.
+- **Code snippet (nếu custom):** chunker tự viết trong `src/NguyenQuangSon-2A202601956/policy_chunker.py`:
+```python
+chunker = HeadingPolicyChunker(chunk_size=900)
+store = build_knowledge_base("data/k4_ecommerce", embedding_fn=embedder, chunker=chunker)
+```
 
 **Thành viên 4 — Nguyễn Trung Hiếu (2A202601620)**
 - **Loại chiến lược:**
@@ -118,7 +123,7 @@ store.add_documents(chunk_docs)
 |-----------|----------|----------------------|-----------|----------|
 | Bùi Xuân Tùng | FixedSizeChunker, chunk_size=900, overlap=150 | 8 | Giữ trọn điều khoản kèm tiêu đề nên hit@3 đạt 5/5; lọc metadata `category=security` đưa câu 5 từ 2/3 lên 3/3 | Chunk dài 884 ký tự trung bình nên tốn token ngữ cảnh; đoạn "hoàn tiền 3-5 ngày làm việc" hút nhầm top-1 ở câu 1 và câu 5 |
 | Đặng Ngọc Anh | RecursiveChunker, chunk_size=600 | 8 | Tách theo `\n\n`/`\n` nên chunk bám sát heading gốc của tài liệu; 5/5 câu có chunk liên quan trong top-3; lọc `category=security` loại sạch nhiễu từ `k4_returns_policy` ở câu 5 | Chunk 600 ký tự đôi khi tách rời tiêu đề khỏi đoạn số liệu cụ thể (con số "30 ngày" rơi xuống hạng 2 ở câu 1); tài liệu ngắn (`k4_chinh_sach_kiem_hang`, 835 ký tự) bị tài liệu dài hơn lấn át ở câu 4 |
-| Nguyễn Quang Sơn | | | | |
+| Nguyễn Quang Sơn | HeadingPolicyChunker, `chunk_size=900` | 4/10 *(baseline mock, hit@3 = 2/5)* | Giữ heading cùng điều khoản; 81 chunk, trung bình 473 ký tự; hỗ trợ truy xuất theo từng mục chính sách | Kết quả nhạy với mock embedding; cần đánh giá lại bằng embedding ngữ nghĩa trước khi kết luận chất lượng |
 | Nguyễn Trung Hiếu | | | | |
 | Trần Trung Kiên | Custom `HeaderChunker`, chia theo tiêu đề markdown (`##`/`###`), fallback `RecursiveChunker(chunk_size=800)` | 8 | Chunk ngắn (611.5 ký tự TB) và "sạch" theo từng điều khoản nên top-1 chính xác tuyệt đối ở câu 1, 4, 5; ít tốn token ngữ cảnh hơn hẳn so với FixedSize 900 | Câu trả lời trải trên 2 heading liên tiếp (câu 2) bị tách thành 2 chunk riêng, top-1 chỉ chứa một nửa câu trả lời; mục quá ngắn (câu 3, "Bước 1" chỉ 2 dòng) thiếu từ khoá nên bị chunk khác xếp trên, tụt xuống hạng 2 |
 
